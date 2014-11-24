@@ -1,8 +1,31 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 	<head>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<meta charset="utf-8"/>
 	</head>
 	<body>
-		<canvas width=700 height=500 style="border:1px solid #d3d3d3;" id="canvas"></canvas>
-		<script type="text/javascript" src="js/mke.js"></script>
+		<div class="header">
+			<H1>Лабораторная работа №2</H1>
+			<H2>Вариант 50</H2>
+		</div>
+		<div class="tools">
+			<div>Количество элементов:</div>
+			<input name="count" type="radio">20</input>
+			<input name="count" type="radio">40</input>
+			<div>
+				<a href="">Дополнительные настройки</a>
+				<div class="additional-settings">
+					<input type="number">Масштаб Y</input>
+					<input type="number">Масштаб X</input>
+				</div>
+			</div>
+
+			<button>Решить</button>
+		</div>
+		<div class="canvas-container">
+			<canvas class="canvas" width=600 height=400 id="canvas"></canvas>
+		</div>
+		<script type="text/javascript" src="js/graphic.js"></script>
+		<script type="text/javascript" src="js/gauss.js"></script>
 	</body>
 </html>

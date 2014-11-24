@@ -1,5 +1,6 @@
 var CANVAS = 'canvas';
-var SCALE=50;
+var SCALE_X = 20;
+var SCALE_Y = 20;
 
 function Drawer() {
 
@@ -12,8 +13,8 @@ function Drawer() {
 		var deltaY = canvas.height/2;
 
 		ctx.beginPath();
-		ctx.moveTo(x1*SCALE+deltaX, deltaY-y1*SCALE);
-		ctx.lineTo(x2*SCALE+deltaX, deltaY-y2*SCALE);
+		ctx.moveTo(x1*SCALE_X+deltaX, deltaY-y1*SCALE_Y);
+		ctx.lineTo(x2*SCALE_X+deltaX, deltaY-y2*SCALE_Y);
 		ctx.stroke();
 	}
 
@@ -39,9 +40,10 @@ function Coordinator() {
 		ctx.stroke();
 	}
 
-	this.writeX = function(min, max) {
+	this.writeX = function() {
 
-		var deltaX = canvas.width/(max-min);
+		var max = (canvas.width/2)/SCALE_X;
+		var min = -max;
 		var curX = 0;
 
 		ctx.font="10px Georgia";
@@ -53,17 +55,17 @@ function Coordinator() {
 			ctx.lineTo(curX, canvas.height/2 + LENGTH_OF_CELL/2);
 
 			ctx.stroke();
-
-			ctx.fillText(min.toFixed(1), curX, canvas.height/2 - 2*(LENGTH_OF_CELL/2));
+			ctx.fillText(min.toFixed(1), curX, canvas.height/2 - 8);
 
 			min += 1;
-			curX += deltaX;
+			curX += SCALE_X;
 		}
 	}
 
 	this.writeY = function(min, max) {
 
-		var deltaY = canvas.height / (max - min);
+		var max = (canvas.height/2)/SCALE_Y;
+		var min = -max;
 		var curY = 0;
 
 		ctx.font = "10px Georgia";
@@ -76,10 +78,10 @@ function Coordinator() {
 
 			ctx.stroke();
 
-			ctx.fillText(min.toFixed(1), canvas.width/2 - 10 * (LENGTH_OF_CELL/2), curY);
+			ctx.fillText(min.toFixed(1), canvas.width/2 + 8, curY);
 
 			min += 1;
-			curY += deltaY;
+			curY += SCALE_Y;
 		}
 	}
 }

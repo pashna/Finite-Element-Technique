@@ -1,0 +1,31 @@
+.canvas {
+    display: inline;
+    border: 1px solid black;
+}
+
+.canvas-container {
+    display: inline-block;
+    text-align: center;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+h2 {
+    font-size: 22px;
+}
+
+.header {
+    text-align: center;
+}
+
+input[text] {
+    display: block;
+}
+
+.tools {
+    display: inline-block;
+    width: 30%;
+    float: left;
+}
