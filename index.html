@@ -10,17 +10,18 @@
 		</div>
 		<div class="tools">
 			<div>Количество элементов:</div>
-			<input name="count" type="radio">20</input>
+			<input name="count" type="radio" checked>20</input>
 			<input name="count" type="radio">40</input>
 			<div>
 				<a href="">Дополнительные настройки</a>
 				<div class="additional-settings">
-					<input type="number">Масштаб Y</input>
-					<input type="number">Масштаб X</input>
+					<input id="scaleY" value=50 type="number">Масштаб Y</input>
+					<input id="scaleX" value=50 type="number">Масштаб X</input>
+					<button id="confirmSetting">OK</button>
 				</div>
 			</div>
 
-			<button>Решить</button>
+			<button id="solveBtn">Решить</button>
 		</div>
 		<div class="canvas-container">
 			<canvas class="canvas" width=600 height=400 id="canvas"></canvas>
