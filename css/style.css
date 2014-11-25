@@ -3,8 +3,18 @@
     border: 1px solid black;
 }
 
-.canvas-container {
+.tools {
+    float: left;
+    width: 25%;
+}
+
+.result-container{
+    float: right;
+    width: 20%;
+}
+.canvas-container{
     display: inline-block;
+    width: 55%;
     text-align: center;
 }
 
@@ -24,8 +34,6 @@ input[text] {
     display: block;
 }
 
-.tools {
+table {
     display: inline-block;
-    width: 30%;
-    float: left;
 }
