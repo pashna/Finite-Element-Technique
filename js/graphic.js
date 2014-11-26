@@ -5,6 +5,7 @@ var SCALE_Y = 50;
 var confirmSetting = document.getElementById('confirmSetting');
 var solveBtn = document.getElementById('solveBtn');
 var finiteElementMethod = new FiniteElementMethod();
+var drawer = new Drawer();
 
 confirmSetting.addEventListener('click',function() {
 	var input_x = document.getElementById('scaleX').value;
@@ -24,21 +25,7 @@ confirmSetting.addEventListener('click',function() {
 		document.getElementById('scaleY').value = "ONLY NUMBER";
 	}
 
-
-	// TESTING!!!!!! =======================
-	var canvas = document.getElementById(CANVAS);
-	var ctx = canvas.getContext("2d");
-
-	ctx.clearRect(0,0, 1000, 1000);
-
-	var drawer = new Drawer();
-	var coordinator = new Coordinator();
-	coordinator.createCoordinates();
-	coordinator.writeX();
-	coordinator.writeY();
-	/*
-	ПЕРЕРИСОВАТЬ!
-	 */
+	drawer.redraw();
 
 } , false)
 
@@ -46,9 +33,6 @@ solveBtn.addEventListener('click', function () {
 	var count = document.querySelector('input[type=radio]:checked').value;
 	var x = finiteElementMethod.solve(+count);
 	var y = finiteElementMethod.getY();
-	var drawer = new Drawer();
-	console.log('x=', x);
-	console.log('y=', y);
 	drawer.draw(x,y);
 
 }, false);
@@ -57,6 +41,7 @@ function Drawer() {
 
 	var canvas = document.getElementById(CANVAS);
 	var ctx = canvas.getContext("2d");
+	var coordinator = new Coordinator();
 
 	this._drawLine = function(x1, y1, x2, y2) {
 		var deltaX = canvas.width/2;
@@ -68,11 +53,24 @@ function Drawer() {
 		ctx.stroke();
 	}
 
-	this.draw = function(x, y) {
+	this.redraw = function() {
 		ctx.clearRect(0,0, 1000, 1000);
+		coordinator.createCoordinates();
+		coordinator.writeX();
+		coordinator.writeY();
+		for (var i=1; i<this.x.length; i++) {
+			this._drawLine(this.x[i-1], this.y[i-1], this.x[i], this.y[i]);
+		}
+	}
 
+	this.draw = function(x, y) {
+		this.x = x;
+		this.y = y;
+
+		console.log(this);
+
+		ctx.clearRect(0,0, 1000, 1000);
 		var drawer = new Drawer();
-		var coordinator = new Coordinator();
 		coordinator.createCoordinates();
 		coordinator.writeX();
 		coordinator.writeY();
@@ -85,8 +83,8 @@ function Drawer() {
 
 function Coordinator() {
 	var LENGTH_OF_CELL = 6;
-	var MIN_DISTANCE_BETWEEN_CELL = 5;
-	var MIN_DISTANCE_BETWEEN_TEXT = 20;
+	var MIN_DISTANCE_BETWEEN_CELL = 10;
+	var MIN_DISTANCE_BETWEEN_TEXT = 30;
 
 	var canvas = document.getElementById(CANVAS);
 	var ctx = canvas.getContext("2d");

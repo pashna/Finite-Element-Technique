@@ -32,11 +32,16 @@ function FiniteElementMethod() {
     }
 
     this._generateAandB = function() {
+
         this.A = [];
+        console.log(this);
 
         for (var i=0; i<this.N+1; i++) {
             this.A.push(new Array(this.N+1));
         }
+
+        console.log('length='+this.A.length, this.A);
+        console.log('length='+this.b.length, this.b);
 
         for (var i=0; i<this.N+1; i++) {
             for (var j=0; j<this.N+1; j++)
@@ -68,9 +73,6 @@ function FiniteElementMethod() {
         }
 
 
-        console.log('length='+this.A.length, this.A);
-        console.log('length='+this.b.length, this.b);
-
         console.log('=================');
 
         this.b.shift();
@@ -93,7 +95,7 @@ function FiniteElementMethod() {
         var y = [];
         var cur = 0;
         var step = this.LENGTH/this.N;
-        for (var i=0; i < this.N; i++) {
+        for (var i=0; i <= this.N; i++) {
             y[i] = cur;
             cur += step;
         }
