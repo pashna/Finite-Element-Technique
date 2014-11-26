@@ -18,7 +18,7 @@ body {
 
 .canvas-container{
     display: inline-block;
-    width: 77%;
+    width: 70%;
     text-align: center;
 }
 
@@ -33,7 +33,7 @@ h2 {
 
 .header {
     text-align: center;
-
+    margin-bottom: 30px;
 }
 
 input[number] {
@@ -93,5 +93,11 @@ table, td, th {
 
 .additional-settings {
     display: none;
+}
+
+#solveBtn {
+    font-size: 17px;
+    padding: 8px;
+    font-style: inherit;
 }
 
