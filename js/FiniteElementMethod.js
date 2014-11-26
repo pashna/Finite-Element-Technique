@@ -2,7 +2,7 @@ function FiniteElementMethod() {
 
     this.N = 20;
     this.LENGTH = 17;
-    var U0 = 4;
+    var U0 = -4;
     var dU_dX = -6;
     this.A = [];
     this.b = [];
@@ -84,22 +84,22 @@ function FiniteElementMethod() {
     }
 
     this.solve = function(n) {
-        this.N = n;
+        this.N = n+1;
         this._generateAandB();
-        var x = solveByGauss(this.A, this.b);
-        x.unshift(U0);
-        return x;
+        var y = solveByGauss(this.A, this.b);
+        y.unshift(U0);
+        return y;
     }
 
-    this.getY = function() {
-        var y = [];
+    this.getX = function() {
+        var x = [];
         var cur = 0;
         var step = this.LENGTH/this.N;
         for (var i=0; i <= this.N; i++) {
-            y[i] = cur;
+            x[i] = cur;
             cur += step;
         }
-        return y;
+        return x;
     }
 
 }

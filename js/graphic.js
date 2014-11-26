@@ -31,9 +31,13 @@ confirmSetting.addEventListener('click',function() {
 
 solveBtn.addEventListener('click', function () {
 	var count = document.querySelector('input[type=radio]:checked').value;
-	var x = finiteElementMethod.solve(+count);
-	var y = finiteElementMethod.getY();
+	var y = finiteElementMethod.solve(+count);
+	var x = finiteElementMethod.getX();
+
+	console.log(x);
+	console.log(y);
 	drawer.draw(x,y);
+	fillTable(x,y);
 
 }, false);
 
@@ -164,5 +168,18 @@ function Coordinator() {
 			//console.log("curY="+curY, "min="+min, "max="+max);
 		}
 	}
+}
+
+function fillTable(x, y) {
+	var table = document.getElementById("table");
+	table.innerHTML = '<tr><td>X</td><td>Y</td><td>Аналит.</td><td>Погрешность</td></tr>'
+	for (var i=0; i< x.length; i++) {
+		var analitic_solves = analitics(x[i]);
+		table.innerHTML += '<tr><td>'+ x[i] + '</td><td>' + y[i] + '</td><td>'+analitic_solves+'</td><td>'+Math.abs(analitic_solves-y[i])+'</td></tr>';
+	}
+}
+
+function analitics(x) {
+	return -(4*(-3*Math.exp((21/2-(5*Math.sqrt(17))/2)*x+(85*Math.sqrt(17))/2)+21*Math.exp((21/2-(5*Math.sqrt(17))/2)*x+85*Math.sqrt(17)+357/2)+5*Math.sqrt(17)*Math.exp((21/2-(5*Math.sqrt(17))/2)*x+85*Math.sqrt(17)+357/2)-21*Math.exp((21/2+(5*Math.sqrt(17))/2)*x+357/2)+5*Math.sqrt(17)*Math.exp((21/2+(5*Math.sqrt(17))/2)*x+357/2)+3*Math.exp((21/2+(5*Math.sqrt(17))/2)*x+(85*Math.sqrt(17))/2)))/(-21*Math.exp(357/2)+5*Math.sqrt(17)*Math.exp(357/2)+21*Math.exp(357/2+85*Math.sqrt(17))+5*Math.sqrt(17)*Math.exp(357/2+85*Math.sqrt(17)));
 }
 

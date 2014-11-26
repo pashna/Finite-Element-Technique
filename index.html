@@ -17,6 +17,7 @@
 				<div class="additional-settings">
 					<input id="scaleY" value=50 type="number">Масштаб Y</input>
 					<input id="scaleX" value=50 type="number">Масштаб X</input>
+					<input id="preciseness" value=5 min="0" max="20" type="number" maxlength="20">Точность</input>
 					<button id="confirmSetting">OK</button>
 				</div>
 			</div>
@@ -27,7 +28,7 @@
 			<canvas class="canvas" width=600 height=400 id="canvas"></canvas>
 		</div>
 		<div class="result-container">
-			<table>
+			<table id="table">
 				<tr>
 					<td>X</td>
 					<td>Y</td>
