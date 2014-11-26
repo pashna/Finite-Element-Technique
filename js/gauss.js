@@ -5,8 +5,8 @@
 /*
 Решаем Ax=b
  */
-function solveByGauss(A, b){
-    A = pasteTogether(A, b)
+function solveByGauss(Ab, b){
+    var A = pasteTogether(Ab, b)
 
     var n = A.length;
 
@@ -54,7 +54,7 @@ function solveByGauss(A, b){
 
 
 function pasteTogether(A, b) {
-    Ab = clone(A);
+    var Ab = clone(A);
     for (var i=0; i< b.length; i++) {
         Ab[i].push(b[i]);
     }
@@ -69,12 +69,3 @@ function clone(obj) {
     }
     return copy;
 }
-
-var matrix = [];
-matrix.push([11,1,5,8]);
-matrix.push([3,4,1,2]);
-matrix.push([4,2,4,3]);
-matrix.push([4,2,4,1]);
-var load = [0,4,1,5]
-
-console.log(solveByGauss(matrix, load));

@@ -34,6 +34,8 @@ function FiniteElementMethod() {
     this._generateAandB = function() {
 
         this.A = [];
+        this.b = [];
+
         console.log(this);
 
         for (var i=0; i<this.N+1; i++) {
@@ -102,4 +104,8 @@ function FiniteElementMethod() {
         return x;
     }
 
+}
+
+function analitics(x) {
+    return -(4*(-3*Math.exp((21/2-(5*Math.sqrt(17))/2)*x+(85*Math.sqrt(17))/2)+21*Math.exp((21/2-(5*Math.sqrt(17))/2)*x+85*Math.sqrt(17)+357/2)+5*Math.sqrt(17)*Math.exp((21/2-(5*Math.sqrt(17))/2)*x+85*Math.sqrt(17)+357/2)-21*Math.exp((21/2+(5*Math.sqrt(17))/2)*x+357/2)+5*Math.sqrt(17)*Math.exp((21/2+(5*Math.sqrt(17))/2)*x+357/2)+3*Math.exp((21/2+(5*Math.sqrt(17))/2)*x+(85*Math.sqrt(17))/2)))/(-21*Math.exp(357/2)+5*Math.sqrt(17)*Math.exp(357/2)+21*Math.exp(357/2+85*Math.sqrt(17))+5*Math.sqrt(17)*Math.exp(357/2+85*Math.sqrt(17)));
 }

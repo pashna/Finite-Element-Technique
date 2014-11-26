@@ -1,6 +1,7 @@
 var CANVAS = 'canvas';
-var SCALE_X = 50;
-var SCALE_Y = 50;
+var SCALE_X = 2;
+var SCALE_Y = 2;
+var precision = 5;
 
 var confirmSetting = document.getElementById('confirmSetting');
 var solveBtn = document.getElementById('solveBtn');
@@ -25,7 +26,9 @@ confirmSetting.addEventListener('click',function() {
 		document.getElementById('scaleY').value = "ONLY NUMBER";
 	}
 
+	precision = +document.getElementById('precision').value;
 	drawer.redraw();
+	fillTable(drawer.x, drawer.y);
 
 } , false)
 
@@ -39,7 +42,26 @@ solveBtn.addEventListener('click', function () {
 	drawer.draw(x,y);
 	fillTable(x,y);
 
+	precision = +document.getElementById('precision').value;
+
 }, false);
+
+$('.header-btn').click(function() {
+	$('.result-container').show();
+	$('.invisible').show();
+})
+
+$('.invisible').click(function() {
+	$('.invisible').hide();
+})
+
+$('#setting').click(function() {
+	if ( $('.additional-settings').is(':visible') ) {
+		$('.additional-settings').hide();
+	} else {
+		$('.additional-settings').show();
+	}
+})
 
 function Drawer() {
 
@@ -71,10 +93,7 @@ function Drawer() {
 		this.x = x;
 		this.y = y;
 
-		console.log(this);
-
 		ctx.clearRect(0,0, 1000, 1000);
-		var drawer = new Drawer();
 		coordinator.createCoordinates();
 		coordinator.writeX();
 		coordinator.writeY();
@@ -171,15 +190,17 @@ function Coordinator() {
 }
 
 function fillTable(x, y) {
-	var table = document.getElementById("table");
-	table.innerHTML = '<tr><td>X</td><td>Y</td><td>Аналит.</td><td>Погрешность</td></tr>'
+	$('#noSolution').hide();
+	document.getElementById('result-container').innerHTML = "";
+	var table = document.createElement("table");
+	table.innerHTML = '<tr><th>X</th><th>Y</th><th>Аналит.</th><th>Погрешность</th></tr>'
 	for (var i=0; i< x.length; i++) {
-		var analitic_solves = analitics(x[i]);
-		table.innerHTML += '<tr><td>'+ x[i] + '</td><td>' + y[i] + '</td><td>'+analitic_solves+'</td><td>'+Math.abs(analitic_solves-y[i])+'</td></tr>';
+		var analitic_solve = analitics(x[i]).toFixed(precision);
+		table.innerHTML += '<tr><td>'+ x[i].toFixed(precision) + '</td><td>' + y[i].toFixed(precision) + '</td><td>'+analitic_solve+'</td><td>'+Math.abs(analitic_solve-y[i]).toFixed(precision)+'</td></tr>';
 	}
-}
+	document.getElementById('result-container').appendChild(table);
+	table.className = "padding7";
 
-function analitics(x) {
-	return -(4*(-3*Math.exp((21/2-(5*Math.sqrt(17))/2)*x+(85*Math.sqrt(17))/2)+21*Math.exp((21/2-(5*Math.sqrt(17))/2)*x+85*Math.sqrt(17)+357/2)+5*Math.sqrt(17)*Math.exp((21/2-(5*Math.sqrt(17))/2)*x+85*Math.sqrt(17)+357/2)-21*Math.exp((21/2+(5*Math.sqrt(17))/2)*x+357/2)+5*Math.sqrt(17)*Math.exp((21/2+(5*Math.sqrt(17))/2)*x+357/2)+3*Math.exp((21/2+(5*Math.sqrt(17))/2)*x+(85*Math.sqrt(17))/2)))/(-21*Math.exp(357/2)+5*Math.sqrt(17)*Math.exp(357/2)+21*Math.exp(357/2+85*Math.sqrt(17))+5*Math.sqrt(17)*Math.exp(357/2+85*Math.sqrt(17)));
+
 }
 

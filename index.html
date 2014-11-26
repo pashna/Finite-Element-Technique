@@ -1,23 +1,30 @@
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 	<head>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
 		<meta charset="utf-8"/>
 	</head>
 	<body>
+		<div class="invisible">
+			<div class="result-container" id="result-container">
+				<h2 id="noSolution">Нет решения</h2>
+			</div>
+		</div>
 		<div class="header">
 			<H1>Лабораторная работа №2</H1>
 			<H2>Вариант 50</H2>
+			<a class="header-btn">Показать решение</a>
 		</div>
 		<div class="tools">
 			<div>Количество элементов:</div>
 			<input name="count" value=20 type="radio" checked>20</input>
 			<input name="count" value=40 type="radio">40</input>
 			<div>
-				<a href="">Дополнительные настройки</a>
-				<div class="additional-settings">
-					<input id="scaleY" value=50 type="number">Масштаб Y</input>
-					<input id="scaleX" value=50 type="number">Масштаб X</input>
-					<input id="preciseness" value=5 min="0" max="20" type="number" maxlength="20">Точность</input>
+				<button id="setting">Дополнительные настройки</button>
+				<div class="additional-settings" id="setting_block">
+					<input id="scaleY" value=2 type="number">Масштаб Y</input>
+					<input id="scaleX" value=2 type="number">Масштаб X</input>
+					<input id="precision" value=5 min="0" max="20" type="number" maxlength="20">Точность</input>
 					<button id="confirmSetting">OK</button>
 				</div>
 			</div>
@@ -25,16 +32,9 @@
 			<button id="solveBtn">Решить</button>
 		</div>
 		<div class="canvas-container">
-			<canvas class="canvas" width=600 height=400 id="canvas"></canvas>
+			<canvas class="canvas" width=800 height=500 id="canvas"></canvas>
 		</div>
-		<div class="result-container">
-			<table id="table">
-				<tr>
-					<td>X</td>
-					<td>Y</td>
-				</tr>
-			</table>
-		</div>
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="js/gauss.js"></script>
 		<script type="text/javascript" src="js/FiniteElementMethod.js"></script>
 		<script type="text/javascript" src="js/graphic.js"></script>
