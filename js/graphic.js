@@ -3,6 +3,8 @@ var SCALE_X = 50;
 var SCALE_Y = 50;
 
 var confirmSetting = document.getElementById('confirmSetting');
+var solveBtn = document.getElementById('solveBtn');
+var finiteElementMethod = new FiniteElementMethod();
 
 confirmSetting.addEventListener('click',function() {
 	var input_x = document.getElementById('scaleX').value;
@@ -34,19 +36,29 @@ confirmSetting.addEventListener('click',function() {
 	coordinator.createCoordinates();
 	coordinator.writeX();
 	coordinator.writeY();
-
-	for (var i=1; i<x.length; i++) {
-		drawer.drawLine(x[i-1], y[i-1], x[i], y[i]);
-	}
+	/*
+	ПЕРЕРИСОВАТЬ!
+	 */
 
 } , false)
+
+solveBtn.addEventListener('click', function () {
+	var count = document.querySelector('input[type=radio]:checked').value;
+	var x = finiteElementMethod.solve(+count);
+	var y = finiteElementMethod.getY();
+	var drawer = new Drawer();
+	console.log('x=', x);
+	console.log('y=', y);
+	drawer.draw(x,y);
+
+}, false);
 
 function Drawer() {
 
 	var canvas = document.getElementById(CANVAS);
 	var ctx = canvas.getContext("2d");
 
-	this.drawLine = function(x1, y1, x2, y2) {
+	this._drawLine = function(x1, y1, x2, y2) {
 		var deltaX = canvas.width/2;
 		var deltaY = canvas.height/2;
 
@@ -54,6 +66,19 @@ function Drawer() {
 		ctx.moveTo(x1*SCALE_X+deltaX, deltaY-y1*SCALE_Y);
 		ctx.lineTo(x2*SCALE_X+deltaX, deltaY-y2*SCALE_Y);
 		ctx.stroke();
+	}
+
+	this.draw = function(x, y) {
+		ctx.clearRect(0,0, 1000, 1000);
+
+		var drawer = new Drawer();
+		var coordinator = new Coordinator();
+		coordinator.createCoordinates();
+		coordinator.writeX();
+		coordinator.writeY();
+		for (var i=1; i<x.length; i++) {
+			this._drawLine(x[i-1], y[i-1], x[i], y[i]);
+		}
 	}
 
 }
@@ -138,26 +163,8 @@ function Coordinator() {
 			distanceText += SCALE_Y;
 			distanceCell += SCALE_Y;
 
-			console.log("curY="+curY, "min="+min, "max="+max);
+			//console.log("curY="+curY, "min="+min, "max="+max);
 		}
 	}
 }
 
-var i=-40;
-var x = [];
-var y = [];
-while(i<50) {
-	x.push(i);
-	y.push(Math.cos(i));
-	i += 0.05;
-}
-
-var drawer = new Drawer();
-var coordinator = new Coordinator();
-coordinator.createCoordinates();
-coordinator.writeX();
-coordinator.writeY();
-
-for (var i=1; i<x.length; i++) {
-	drawer.drawLine(x[i-1], y[i-1], x[i], y[i]);
-}
