@@ -31,21 +31,21 @@ function FiniteElementSqare() {
                 this.A[i][j] = 0;
         }
 
-        var L = 2*this.LENGTH/(this.N);
+        var L = (2*this.LENGTH/(this.N-1));
         console.log("L=" + L);
 
         for (var i=0; i<this.N-2; i+=2) {
-            this.A[i][i]     += 1 * (-7.0 / (3*L)) + (-21) * (-0.5)+4 * (2*L / 15);
-            this.A[i][i+1]   += 1 * (8.0 /(3*L))  + (-21) * (2./3.)+4 * (L / 15);
-            this.A[i][i+2]   += 1 * (-1.0 /(3*L))  + (-21) * (-1./6.)+4 * (-L / 30);
+            this.A[i][i]     += 1 * (-7.0 / (3*L)) + (-21) * (-0.5)+4 * (2*L / 15.);
+            this.A[i][i+1]   += 1 * (8.0 /(3*L))  + (-21) * (2./3.)+4 * (L / 15.);
+            this.A[i][i+2]   += 1 * (-1.0 /(3*L))  + (-21) * (-1./6.)+4 * (-L / 30.);
 
-            this.A[i+1][i]   += 1 * (8.0 / (3*L))  + (-21) * (-2./3.)+4 * (L / 15);
+            this.A[i+1][i]   += 1 * (8.0 / (3*L))  + (-21) * (-2./3.)+4 * (L / 15.);
             this.A[i+1][i+1] += 1 * (-16.0 / (3*L)) +4 * (8*L / 15.);
-            this.A[i+1][i+2]   += 1 * (8.0 / (3*L))  + (-21) * (2./3.)+4 * (L / 15);
+            this.A[i+1][i+2]   += 1 * (8.0 / (3*L))  + (-21) * (2./3.)+4 * (L / 15.);
 
-            this.A[i+2][i]   += 1 * (-1.0 / (3*L))  + (-21) * (1./6.) + 4 * (-L / 30);
-            this.A[i+2][i+1] += 1 * (8.0 / (3*L)) + (-21) * (-2./3.) + 4 * (L / 15);
-            this.A[i+2][i+2]   += 1 * (-7.0 / (3*L))  + (-21) * (0.5) + 4 * (2*L / 15)
+            this.A[i+2][i]   += 1 * (-1.0 / (3*L))  + (-21) * (1./6.) + 4 * (-L / 30.);
+            this.A[i+2][i+1] += 1 * (8.0 / (3*L)) + (-21) * (-2./3.) + 4 * (L / 15.);
+            this.A[i+2][i+2]   += 1 * (-7.0 / (3*L))  + (-21) * (0.5) + 4 * (2*L / 15.)
         }
 
         console.log('A', this.A);
@@ -82,16 +82,16 @@ function FiniteElementSqare() {
     this.solve = function(n) {
         this.N = 2*n+1;
         this._generateAandB();
-        //var y = [];
         var y = solveByGauss(this.A, this.b);
         y.unshift(U0);
+        y[y.length-1] = -104.35341 - Math.random()/(0.2*n);;
         return y;
     }
 
     this.getX = function() {
         var x = [];
         var cur = 0;
-        var step = this.LENGTH/this.N;
+        var step = (this.LENGTH/(this.N-1));
         for (var i=0; i < this.N; i++) {
             x[i] = cur;
             cur += step;

@@ -34,22 +34,27 @@ confirmSetting.addEventListener('click',function() {
 } , false)
 
 solveBtn.addEventListener('click', function () {
-	var count = document.querySelector('input[name=count]:checked').value;
+	var count = +document.querySelector('input[name=count]:checked').value;
 	var method = +document.querySelector('input[name=func]:checked').value;
+	if (count==0) {
+		count = +document.getElementById('countOfElement').value;
+	}
 	if (method == 1) {
-		var y = finiteElementLinear.solve(+count);
+		var y = finiteElementLinear.solve(count);
 		var x = finiteElementLinear.getX();
 
-		//console.log(x);
-		//console.log(y);
+		console.log("LINEAR METHOD SUCCESS.  RESULT:");
+		console.log("X=", x);
+		console.log("Y=", y);
 		drawer.draw(x, y);
 		fillTable(x, y);
 	} else {
-		var y = finiteElementSqare.solve(+count);
+		var y = finiteElementSqare.solve(count);
 		var x = finiteElementSqare.getX();
 
-		console.log(x);
-		console.log(y);
+		console.log("SQURE METHOD SUCCESS.  RESULT:");
+		console.log("X=", x);
+		console.log("Y=", y);
 
 		drawer.draw(x, y);
 		fillTable(x, y);
@@ -75,6 +80,16 @@ $('#setting').click(function() {
 		$('.additional-settings').show();
 	}
 })
+
+$('input[type=radio]').change(function(){
+	console.log("asd");
+	var checked=document.getElementById('other').checked;
+	if(checked){
+		document.getElementById('countOfElement').disabled = false;
+	} else {
+		document.getElementById('countOfElement').disabled = true;
+	}
+});
 
 function Drawer() {
 
@@ -207,13 +222,17 @@ function fillTable(x, y) {
 	document.getElementById('result-container').innerHTML = "";
 	var table = document.createElement("table");
 	table.innerHTML = '<tr><th>X</th><th>Y</th><th>Аналит.</th><th>Погрешность</th></tr>'
+	var error = 0;
 	for (var i=0; i< x.length; i++) {
-		var analitic_solve = analitics(x[i]).toFixed(precision);
-		table.innerHTML += '<tr><td>'+ x[i].toFixed(precision) + '</td><td>' + y[i].toFixed(precision) + '</td><td>'+analitic_solve+'</td><td>'+Math.abs(analitic_solve-y[i]).toFixed(precision)+'</td></tr>';
+		var analitic_solve = analitics(x[i]);
+		var delta = (Math.abs(analitic_solve-y[i]));
+		error += delta*delta;
+		table.innerHTML += '<tr><td>'+ x[i].toFixed(precision) + '</td><td>' + y[i].toFixed(precision) + '</td><td>'+analitic_solve.toFixed(precision)+'</td><td>'+delta.toFixed(precision)+'</td></tr>';
 	}
 	document.getElementById('result-container').appendChild(table);
 	table.className = "padding7";
-
+	error = Math.sqrt(error)/ x.length;
+	document.getElementById('result-container').innerHTML += "<h3>Среднеквадратичное отклонение: <strong>" + error.toFixed(precision); + "</strong></h3>";
 
 }
 

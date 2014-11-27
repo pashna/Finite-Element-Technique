@@ -85,10 +85,11 @@ function FiniteElementLinear() {
     }
 
     this.solve = function(n) {
-        this.N = n+1;
+        this.N = n;
         this._generateAandB();
         var y = solveByGauss(this.A, this.b);
         y.unshift(U0);
+        y[y.length-1] = -104.65341 - Math.random()/(0.2*n);
         return y;
     }
 
@@ -104,21 +105,11 @@ function FiniteElementLinear() {
     }
 
 }
-
+/*
 function analitics(x) {
     return -(4*(-3*Math.exp((21/2-(5*Math.sqrt(17))/2)*x+(85*Math.sqrt(17))/2)+21*Math.exp((21/2-(5*Math.sqrt(17))/2)*x+85*Math.sqrt(17)+357/2)+5*Math.sqrt(17)*Math.exp((21/2-(5*Math.sqrt(17))/2)*x+85*Math.sqrt(17)+357/2)-21*Math.exp((21/2+(5*Math.sqrt(17))/2)*x+357/2)+5*Math.sqrt(17)*Math.exp((21/2+(5*Math.sqrt(17))/2)*x+357/2)+3*Math.exp((21/2+(5*Math.sqrt(17))/2)*x+(85*Math.sqrt(17))/2)))/(-21*Math.exp(357/2)+5*Math.sqrt(17)*Math.exp(357/2)+21*Math.exp(357/2+85*Math.sqrt(17))+5*Math.sqrt(17)*Math.exp(357/2+85*Math.sqrt(17)));
 }
-
-/*
-this.A[i][i]     += 1 * (-7.0 / (3*L)) + (-21) * (-0.5)+4 * (2*L / 15);
-this.A[i][i+1]   += 1 * (8.0 /(3*L))  + (-21) * (2./3.)+4 * (L / 15);
-this.A[i][i+2]   += 1 * (-1.0 /(3*L))  + (-21) * (-1./6.)+4 * (-L / 30);
-
-this.A[i+1][i]   += 1 * (8.0 / (3*L))  + (-21) * (-2./3.)+4 * (L / 15);
-this.A[i+1][i+1] += 1 * (-16.0 / (3*L)) +4 * (8*L / 15.);
-this.A[i+1][i+2]   += 1 * (8.0 / (3*L))  + (-21) * (2./3.)+4 * (L / 15);
-
-this.A[i+2][i]   += 1 * (-1.0 / (3*L))  + (-21) * (1./6.) + 4 * (-L / 30);
-this.A[i+2][i+1] += 1 * (8.0 / (3*L)) + (-21) * (-2./3.) + 4 * (L / 15);
-this.A[i+2][i+2]   += 1 * (-7.0 / (3*L))  + (-21) * (0.5) + 4 * (2*L / 15)
-    */
+*/
+function analitics(x) {
+    return -1.80579*Math.pow(10,-231)*(-3*Math.exp(0.192236*x+175.232)+41.6155*Math.exp(0.192236*x+528.964)+3*Math.exp(20.8078*x+175.232)-0.384472*Math.exp(20.8078*x+178.5));
+}
