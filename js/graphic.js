@@ -5,7 +5,8 @@ var precision = 5;
 
 var confirmSetting = document.getElementById('confirmSetting');
 var solveBtn = document.getElementById('solveBtn');
-var finiteElementMethod = new FiniteElementMethod();
+var finiteElementLinear = new FiniteElementLinear();
+var finiteElementSqare = new FiniteElementSqare();
 var drawer = new Drawer();
 
 confirmSetting.addEventListener('click',function() {
@@ -33,14 +34,26 @@ confirmSetting.addEventListener('click',function() {
 } , false)
 
 solveBtn.addEventListener('click', function () {
-	var count = document.querySelector('input[type=radio]:checked').value;
-	var y = finiteElementMethod.solve(+count);
-	var x = finiteElementMethod.getX();
+	var count = document.querySelector('input[name=count]:checked').value;
+	var method = +document.querySelector('input[name=func]:checked').value;
+	if (method == 1) {
+		var y = finiteElementLinear.solve(+count);
+		var x = finiteElementLinear.getX();
 
-	console.log(x);
-	console.log(y);
-	drawer.draw(x,y);
-	fillTable(x,y);
+		//console.log(x);
+		//console.log(y);
+		drawer.draw(x, y);
+		fillTable(x, y);
+	} else {
+		var y = finiteElementSqare.solve(+count);
+		var x = finiteElementSqare.getX();
+
+		console.log(x);
+		console.log(y);
+
+		drawer.draw(x, y);
+		fillTable(x, y);
+	}
 
 	precision = +document.getElementById('precision').value;
 

@@ -16,9 +16,14 @@
 			<a class="header-btn">Показать решение</a>
 		</div>
 		<div class="tools">
+			<div>Функция:</div>
+			<input name="func" value="1" type="radio" checked>Линейная</input>
+			<input name="func" value="2" type="radio">Квадратичная</input>
+			<hr/>
 			<div>Количество элементов:</div>
 			<input name="count" value=20 type="radio" checked>20</input>
 			<input name="count" value=40 type="radio">40</input>
+			<hr/>
 			<div>
 				<button id="solveBtn">Решить</button>
 			</div>
@@ -38,7 +43,8 @@
 		</div>
 		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 		<script type="text/javascript" src="js/gauss.js"></script>
-		<script type="text/javascript" src="js/FiniteElementMethod.js"></script>
+		<script type="text/javascript" src="js/FiniteElementMethodLinear.js"></script>
+		<script type="text/javascript" src="js/FiniteElementMethodSquare.js"></script>
 		<script type="text/javascript" src="js/graphic.js"></script>
 	</body>
 </html>

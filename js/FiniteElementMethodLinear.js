@@ -1,4 +1,4 @@
-function FiniteElementMethod() {
+function FiniteElementLinear() {
 
     this.N = 20;
     this.LENGTH = 17;
@@ -59,7 +59,6 @@ function FiniteElementMethod() {
             this.A[i+1][i+1] += RightDown(L);
         }
 
-
         for (var i=0; i<this.N+1; i++) {
             this.A[i][0] *= U0;
         }
@@ -109,3 +108,17 @@ function FiniteElementMethod() {
 function analitics(x) {
     return -(4*(-3*Math.exp((21/2-(5*Math.sqrt(17))/2)*x+(85*Math.sqrt(17))/2)+21*Math.exp((21/2-(5*Math.sqrt(17))/2)*x+85*Math.sqrt(17)+357/2)+5*Math.sqrt(17)*Math.exp((21/2-(5*Math.sqrt(17))/2)*x+85*Math.sqrt(17)+357/2)-21*Math.exp((21/2+(5*Math.sqrt(17))/2)*x+357/2)+5*Math.sqrt(17)*Math.exp((21/2+(5*Math.sqrt(17))/2)*x+357/2)+3*Math.exp((21/2+(5*Math.sqrt(17))/2)*x+(85*Math.sqrt(17))/2)))/(-21*Math.exp(357/2)+5*Math.sqrt(17)*Math.exp(357/2)+21*Math.exp(357/2+85*Math.sqrt(17))+5*Math.sqrt(17)*Math.exp(357/2+85*Math.sqrt(17)));
 }
+
+/*
+this.A[i][i]     += 1 * (-7.0 / (3*L)) + (-21) * (-0.5)+4 * (2*L / 15);
+this.A[i][i+1]   += 1 * (8.0 /(3*L))  + (-21) * (2./3.)+4 * (L / 15);
+this.A[i][i+2]   += 1 * (-1.0 /(3*L))  + (-21) * (-1./6.)+4 * (-L / 30);
+
+this.A[i+1][i]   += 1 * (8.0 / (3*L))  + (-21) * (-2./3.)+4 * (L / 15);
+this.A[i+1][i+1] += 1 * (-16.0 / (3*L)) +4 * (8*L / 15.);
+this.A[i+1][i+2]   += 1 * (8.0 / (3*L))  + (-21) * (2./3.)+4 * (L / 15);
+
+this.A[i+2][i]   += 1 * (-1.0 / (3*L))  + (-21) * (1./6.) + 4 * (-L / 30);
+this.A[i+2][i+1] += 1 * (8.0 / (3*L)) + (-21) * (-2./3.) + 4 * (L / 15);
+this.A[i+2][i+2]   += 1 * (-7.0 / (3*L))  + (-21) * (0.5) + 4 * (2*L / 15)
+    */
